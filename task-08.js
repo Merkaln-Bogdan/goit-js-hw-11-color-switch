@@ -19,16 +19,26 @@ getUlGallery.insertAdjacentHTML('beforeend', createGallery);
 
 const lightboxImage = document.querySelector('.lightbox__image');
 const lightbox = document.querySelector('.js-lightbox');
+const button = document.querySelector('button[data-action="close-lightbox"]');
+
+lightbox.addEventListener('click', closeWindowOverlay);
+button.addEventListener('click', closeLightbox);
 
 function openModalWindow(e) {
   e.preventDefault();
-  window.addEventListener('click', openModalWindow);
+  getUlGallery.addEventListener('click', openModalWindow);
   lightbox.classList.add('is-open');
   lightboxImage.src = e.target.dataset.source;
 }
-lightbox.addEventListener('click', closeLightbox);
 
-function closeLightbox() {
-  window.removeEventListener('click', openModalWindow);
+function closeWindowOverlay(e) {
+  if (e.target === lightboxImage) {
+    return;
+  }
+  closeLightbox();
+}
+
+function closeLightbox(e) {
+  getUlGallery.removeEventListener('click', closeLightbox);
   lightbox.classList.remove('is-open');
 }
