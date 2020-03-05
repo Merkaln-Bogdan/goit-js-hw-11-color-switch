@@ -1,4 +1,4 @@
-import gallery from '.gallery-items';
+import gallery from './gallery-items';
 const getUlGallery = document.querySelector('.js-gallery');
 getUlGallery.addEventListener('click', openModalWindow);
 const createGallery = gallery
